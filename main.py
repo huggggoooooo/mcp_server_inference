@@ -15,14 +15,6 @@ from structs.pk import description as pk_description
 
 mcp = FastMCP("Demo 🚀")
 
-
-@mcp.tool(
-    name="ADMET_Service", 
-    description="Predict the ADMET properties of a molecule. Absorption, Distribution, Metabolism, Excretion and Toxicity Prediction for Molecules"
-)
-async def ADMET_predict_tool(data: InputData) -> RES[AdmetInnerData]:
-    return await ADMET_predict(data)
-
 @mcp.resource("data://ADMET_reference", name="ADMET Reference Data")
 async def admet_meta():
     return {
@@ -32,13 +24,6 @@ async def admet_meta():
     }
 
 
-@mcp.tool(
-    name="Pharmacokinetics_Service",
-    description="Predict the Pharmacokinetics properties of a molecule. Pharmacokinetic Metabolism Curve Prediction, Prediction of Drug Concentration Changes over Time."
-)
-async def Pharmacokinetics_predict_tool(data: InputPK) -> RES[PKResult]:
-    return await Pharmacokinetics_predict(data)
-
 @mcp.resource("data://Pharmacokinetics_reference", name="Pharmacokinetics Reference Data")
 async def pk_meta():
     return {
@@ -46,6 +31,23 @@ async def pk_meta():
         "description": "Pharmacokinetics is a collection of 10 molecular descriptors that are commonly used to predict the pharmacokinetic and pharmacodynamic properties of drugs.",
         "properties": pk_description
     }
+
+
+@mcp.tool(
+    name="ADMET_Service", 
+    description="Predict the ADMET properties of a molecule. Absorption, Distribution, Metabolism, Excretion and Toxicity Prediction for Molecules"
+)
+async def ADMET_predict_tool(data: InputData) -> RES[AdmetInnerData]:
+    return await ADMET_predict(data)
+
+
+@mcp.tool(
+    name="Pharmacokinetics_Service",
+    description="Predict the Pharmacokinetics properties of a molecule. Pharmacokinetic Metabolism Curve Prediction, Prediction of Drug Concentration Changes over Time."
+)
+async def Pharmacokinetics_predict_tool(data: InputPK) -> RES[PKResult]:
+    return await Pharmacokinetics_predict(data)
+
 
 @mcp.tool(
     name="ToxScan_predict",
