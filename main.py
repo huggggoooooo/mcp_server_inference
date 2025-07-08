@@ -14,7 +14,7 @@ from fastmcp import FastMCP
 # from structs.pk import description as pk_description
 
 from tools.diffsbdd import * 
-mcp = FastMCP("Demo 🚀")
+mcp = FastMCP("DiffsbddTest")
 
 @mcp.tool(
     name="molecule_generation_by_index",
